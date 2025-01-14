@@ -1,88 +1,103 @@
-@include('templates.form', ['halaman' => 'mahasiswa', 'title' => 'Tambah Mahasiswa'])
-<div class="page-wrapper">
-    <!-- Page header -->
-    {{-- <div class="page-header d-print-none">
-        <div class="container-xl">
-            <div class="row g-2 align-items-center">
-                <div class="col">
-                    <h2 class="page-title">
-                        Tambah Mahasiswa
-                    </h2>
-                </div>
-            </div>
-        </div>
-    </div> --}}
-    <!-- Page body -->
-    <div class="page-body">
-        <div class="container-xl">
-            <div class="row row-cards">
-                <div class="col-12">
-                    <form class="card" action="{{ route('mahasiswa.tambah.action') }}" method="post" autocomplete="off">
-                        @csrf
-                        <div class="card-body">
-                            <h3 class="card-title">Tambah Mahasiswa</h3>
-                            <div class="row row-cards">
-                                <div class="col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">NIM</label>
-                                        @error('nim')
-                                            <p class="notif-validasi">* {{ $message }}</p>
-                                        @enderror
-                                        <input type="text" class="form-control" placeholder="231351XXX"
-                                            name="nim" value="{{ old('nim') }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-10">
-                                    <div class="mb-3">
-                                        <label class="form-label">Nama Lengkap</label>
-                                        @error('nama')
-                                            <p class="notif-validasi">* {{ $message }}</p>
-                                        @enderror
-                                        <input type="text" class="form-control" placeholder="Nama Lengkap Mahasiswa"
-                                            name="nama" value="{{ old('nama') }}">
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-4">
-                                    <div class="mb-3">
-                                        <label class="form-label">Jenis Kelamin</label>
-                                        @error('jenis_kelamin')
-                                            <p class="notif-validasi">* {{ $message }}</p>
-                                        @enderror
-                                        <select type="text" class="form-select" id="select-optgroups" value=""
-                                            name="jenis_kelamin">
-                                            <optgroup label="Jenis Kelamin">
-                                                <option value="L">Laki-laki</option>
-                                                <option value="P">Perempuan</option>
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="col-sm-6 col-md-6">
-                                    <div class="mb-3">
-                                        <label class="form-label">Kelas</label>
-                                        <select type="text" class="form-select" id="select-optgroups" value=""
-                                            name="id_kelas">
-                                            <optgroup label="Pagi">
-                                                @foreach ($kelasPagi as $pagi)
-                                                    <option value="{{ $pagi->id }}">{{ $pagi->nama }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                            <optgroup label="Malam">
-                                                @foreach ($kelasMalam as $malam)
-                                                    <option value="{{ $malam->id }}">{{ $malam->nama }}</option>
-                                                @endforeach
-                                            </optgroup>
-                                        </select>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-footer text-end">
-                            <button type="submit" class="btn btn-primary">Tambah</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
+@extends('templates.form', ['halaman' => 'mahasiswa', 'title' => 'Tambah Mahasiswa'])
+
+<div class="container mt-5">
+    <!-- Page Header -->
+    <div class="row mb-4">
+        <div class="col-12 text-center">
+            <h2>Tambah Mahasiswa</h2>
         </div>
     </div>
-    @include('templates.footer')
+
+    <!-- Form Tambah Mahasiswa -->
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <form action="{{ route('mahasiswa.tambah.action') }}" method="post" autocomplete="off">
+                @csrf
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title mb-4">Form Tambah Mahasiswa</h5>
+
+                        <!-- NIM -->
+                        <div class="mb-3">
+                            <label for="nim" class="form-label">NIM</label>
+                            <input type="text" class="form-control @error('nim') is-invalid @enderror" id="nim"
+                                name="nim" placeholder="231351XXX" value="{{ old('nim') }}">
+                            @error('nim')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Nama Lengkap -->
+                        <div class="mb-3">
+                            <label for="nama" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control @error('nama') is-invalid @enderror"
+                                id="nama" name="nama" placeholder="Nama Lengkap Mahasiswa"
+                                value="{{ old('nama') }}">
+                            @error('nama')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Jenis Kelamin -->
+                        <div class="mb-3">
+                            <label for="jenis_kelamin" class="form-label">Jenis Kelamin</label>
+                            <select class="form-select @error('jenis_kelamin') is-invalid @enderror" id="jenis_kelamin"
+                                name="jenis_kelamin">
+                                <option value="L" {{ old('jenis_kelamin') == 'L' ? 'selected' : '' }}>Laki-laki
+                                </option>
+                                <option value="P" {{ old('jenis_kelamin') == 'P' ? 'selected' : '' }}>Perempuan
+                                </option>
+                            </select>
+                            @error('jenis_kelamin')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Kelas -->
+                        <div class="mb-3">
+                            <label for="id_kelas" class="form-label">Kelas</label>
+                            <select class="form-select @error('id_kelas') is-invalid @enderror" id="id_kelas"
+                                name="id_kelas">
+                                <optgroup label="Pagi">
+                                    @if ($kelasPagi->isEmpty())
+                                        <option disabled>Tidak ada kelas pagi</option>
+                                    @else
+                                        @foreach ($kelasPagi as $pagi)
+                                            <option value="{{ $pagi->id }}"
+                                                {{ old('id_kelas') == $pagi->id ? 'selected' : '' }}>
+                                                {{ $pagi->nama }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </optgroup>
+                                <optgroup label="Malam">
+                                    @if ($kelasMalam->isEmpty())
+                                        <option disabled>Tidak ada kelas malam</option>
+                                    @else
+                                        @foreach ($kelasMalam as $malam)
+                                            <option value="{{ $malam->id }}"
+                                                {{ old('id_kelas') == $malam->id ? 'selected' : '' }}>
+                                                {{ $malam->nama }}
+                                            </option>
+                                        @endforeach
+                                    @endif
+                                </optgroup>
+                            </select>
+                            @error('id_kelas')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+
+                        <!-- Form Footer -->
+                        <div class="card-footer text-end">
+                            <button type="submit" class="btn btn-primary">Tambah</button>
+                            <a href="{{ route('mahasiswa.data.page') }}" class="btn btn-secondary">Batal</a>
+                        </div>
+                    </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@include('templates.footer')

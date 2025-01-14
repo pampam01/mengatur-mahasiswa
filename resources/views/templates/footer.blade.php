@@ -1,62 +1,32 @@
-<footer class="footer footer-transparent d-print-none">
-    <div class="container-xl">
-        <div class="row text-center align-items-center flex-row-reverse">
-            <div class="col-lg-auto ms-lg-auto">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item"><a href="https://tabler.io/docs" target="_blank" class="link-secondary"
+<footer class="bg-light text-center text-lg-start mt-5">
+    <div class="container p-4">
+        <div class="row">
+            <!-- Section: Links -->
+            <div class="col-lg-6 col-md-12 mb-4">
+                <h5 class="text-uppercase">Useful Links</h5>
+                <ul class="list-unstyled mb-0">
+                    <li><a href="https://getbootstrap.com/docs" class="text-secondary" target="_blank"
                             rel="noopener">Documentation</a></li>
-                    <li class="list-inline-item"><a href="#" class="link-secondary">License</a></li>
-                    <li class="list-inline-item"><a href="https://github.com/tabler/tabler" target="_blank"
-                            class="link-secondary" rel="noopener">Source code</a></li>
-                    <li class="list-inline-item">
-                        <a href="https://github.com/sponsors/codecalm" target="_blank" class="link-secondary"
+                    <li><a href="#" class="text-secondary">License</a></li>
+                    <li><a href="https://github.com/twbs/bootstrap" class="text-secondary" target="_blank"
+                            rel="noopener">Source Code</a></li>
+                    <li><a href="https://github.com/sponsors/twbs" class="text-secondary" target="_blank"
                             rel="noopener">
-                            <!-- Download SVG icon from http://tabler-icons.io/i/heart -->
-                            <svg xmlns="http://www.w3.org/2000/svg" class="icon text-pink icon-filled icon-inline"
-                                width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"
-                                fill="none" stroke-linecap="round" stroke-linejoin="round">
-                                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
-                                <path
-                                    d="M19.5 12.572l-7.5 7.428l-7.5 -7.428a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572" />
-                            </svg>
-                            Sponsor
-                        </a>
-                    </li>
+                            <i class="bi bi-heart text-danger"></i> Sponsor</a></li>
                 </ul>
             </div>
-            <div class="col-12 col-lg-auto mt-3 mt-lg-0">
-                <ul class="list-inline list-inline-dots mb-0">
-                    <li class="list-inline-item">
-                        Copyright &copy; 2023
-                        <a href="." class="link-secondary">Tabler</a>.
-                        All rights reserved.
-                    </li>
-                    <li class="list-inline-item">
-                        <a href="./changelog.html" class="link-secondary" rel="noopener">
-                            v1.0.0-beta20
-                        </a>
-                    </li>
-                </ul>
+            <!-- Section: Text -->
+            <div class="col-lg-6 col-md-12 text-center text-lg-end">
+                <p class="mb-0">
+                    &copy; 2023 <a href="#" class="text-secondary">Bootstrap</a>. All rights reserved.
+                </p>
+                <p>
+                    <a href="#" class="text-secondary" rel="noopener">v5.3.0</a>
+                </p>
             </div>
         </div>
     </div>
 </footer>
-</div>
-</div>
-<!-- Libs JS -->
-<!-- Tabler Core -->
 
-<script src="{{ asset('storage/template-assets/dist/js/tabler.min.js?1692870487') }}" defer></script>
-<script src="{{ asset('storage/template-assets/dist/js/demo.min.js?1692870487') }}" defer></script>
-
-{{-- <script>
-    new DataTable('#example');
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.datatables.net/2.0.7/js/dataTables.js"></script>
-<script src="https://cdn.datatables.net/2.0.7/js/dataTables.bootstrap5.js"></script> --}}
-
-
-</body>
-
-</html>
+<!-- Bootstrap JS Bundle -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
