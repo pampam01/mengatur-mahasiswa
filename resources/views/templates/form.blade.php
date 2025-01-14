@@ -25,7 +25,7 @@
                 <ul class="navbar-nav">
                     <li class="nav-item">
                         <a class="nav-link"
-                            href="{{ $halaman == 'mahasiswa' ? route('mahasiswa.data.page') : route('kelas.data.page') }}">
+                            href="{{ ($halaman == 'mahasiswa' ? route('mahasiswa.data.page') : $halaman == 'kelas') ? route('kelas.data.page') : route('matkul.data.page') }}">
                             <i class="bi bi-arrow-left-circle"></i> Kembali
                         </a>
                     </li>

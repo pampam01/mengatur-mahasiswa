@@ -87,6 +87,23 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
+                        <!-- Mata Kuliah -->
+                        <div class="mb-3">
+                            <label for="id_matkul" class="form-label">Mata Kuliah</label>
+                            <select class="form-select @error('id_matkul') is-invalid @enderror" id="id_matkul"
+                                name="id_matkul">
+                                <option value="">Pilih Mata Kuliah</option>
+                                @foreach ($matkul as $m)
+                                    <option value="{{ $m->id }}"
+                                        {{ old('id_matkul') == $m->id ? 'selected' : '' }}>
+                                        {{ $m->nama }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('id_matkul')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
 
 
                         <!-- Form Footer -->

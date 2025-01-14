@@ -21,4 +21,6 @@ class Kelas extends Model
     public function mahasiswa(): HasMany{
         return $this->hasMany(Mahasiswa::class, "id_kelas", "id");
     }
+
+  
 }

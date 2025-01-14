@@ -1,4 +1,4 @@
-@include('templates.header', ['halaman' => 'kelas', 'title' => 'Kelas'])
+@include('templates.header', ['halaman' => 'matkul', 'title' => 'Matkul'])
 <div class="page-wrapper">
     <!-- Page header -->
     <div class="page-header d-print-none">
@@ -79,7 +79,7 @@
                         Halaman
                     </div>
                     <h2 class="page-title">
-                        Data Kelas
+                        Data Matkul
                     </h2>
                 </div>
                 <!-- Page title actions -->
@@ -90,7 +90,7 @@
                                 New view
                             </a>
                         </span> --}}
-                        <a href="{{ route('kelas.tambah.page') }}" class="btn d-none d-sm-inline-block"
+                        <a href="{{ route('matkul.tambah.page') }}" class="btn d-none d-sm-inline-block"
                             style="background-color:#003356 ; color: white;">
                             <!-- Download SVG icon from http://tabler-icons.io/i/plus -->
                             <svg xmlns="http://www.w3.org/2000/svg" class="icon" width="24" height="24"
@@ -140,16 +140,16 @@
                                 style="width:100%">
                                 <thead>
                                     <tr>
-                                        <th>NO</th>
-                                        <th>NAMA KELAS</th>
-                                        <th>DOSEN WALI</th>
-                                        <th>JUMLAH</th>
+                                        <th>NOMOR</th>
+                                        <th>NAMA MATKUL</th>
+                                        <th>SKS</th>
+                                        <th>SMESTER</th>
                                         <th>WAKTU PEMBELAJARAN</th>
                                         <th class="w-1" colspan="3" style="text-align: center">#</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($datas as $dt)
+                                    @foreach ($data as $dt)
                                         <tr>
                                             <td class="text-secondary">{{ $loop->iteration }}
                                                 @if (Session::has('idDataBaru'))
@@ -157,25 +157,19 @@
                                                         <span class="badge bg-blue text-blue-fg ms-2">Baru</span>
                                                     @endif
                                                 @endif
-                                                @if (Session::has('idKelasTerdaftar'))
-                                                    @if (Session::get('idKelasTerdaftar') == $dt->id)
+                                                @if (Session::has('idMatkulTerdaftar'))
+                                                    @if (Session::get('idMatkulTerdaftar') == $dt->id)
                                                         <span
                                                             class="badge bg-orange text-blue-fg ms-2">Terdaftar</span>
                                                     @endif
                                                 @endif
                                             </td>
                                             <td class="text-secondary">{{ $dt->nama }}</td>
-                                            <td class="text-secondary">{{ $dt->dosen_wali }}</td>
-                                            <td class="text-secondary">{{ $dt->mahasiswa->count() }} Mahasiswa</td>
-                                            <td class="text-secondary">
-                                                @if ($dt->waktu_pembelajaran == 'P')
-                                                    Pagi
-                                                @else
-                                                    Malam
-                                                @endif
-                                            </td>
+                                            <td class="text-secondary">{{ $dt->sks }}</td>
+                                            <td class="text-secondary">{{ $dt->semester }}</td>
 
-                                            <td class="btn-aksi">
+
+                                            {{-- <td class="btn-aksi">
                                                 <a href="{{ route('kelas.detail.page', ['id' => $dt->id]) }}"
                                                     title="detail data"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24"
@@ -187,9 +181,9 @@
                                                         <path d="M12 9h.01" />
                                                         <path d="M11 12h1v4h1" />
                                                     </svg></a>
-                                            </td>
+                                            </td> --}}
                                             <td class="btn-aksi">
-                                                <a href="{{ route('kelas.edit.page', ['id' => $dt->id]) }}"
+                                                <a href="{{ route('matkul.edit.page', ['id' => $dt->id]) }}"
                                                     title="edit data"><svg xmlns="http://www.w3.org/2000/svg"
                                                         width="24" height="24" viewBox="0 0 24 24"
                                                         fill="none" stroke="#8a5700" stroke-width="2"
@@ -234,10 +228,12 @@
                                                         <button type="button"
                                                             class="btn btn-link link-secondary me-auto"
                                                             data-bs-dismiss="modal">Batal</button>
-                                                        <a href="#" id="deleteBtn">
+                                                        <a href="{{ route('matkul.data.hapus', ['id' => $dt->id]) }}"
+                                                            id="deleteBtnMatkul">
                                                             <button type="button" class="btn btn-danger"
                                                                 data-bs-dismiss="modal">Ya,
-                                                                hapus data tersebut</button></a>
+                                                                hapus data tersebut</button>
+                                                        </a>
                                                     </div>
                                                 </div>
                                             </div>
@@ -245,7 +241,7 @@
                                     @endforeach
                                 </tbody>
                             </table>
-                            @if ($jumlahData == 0)
+                            @if ($jumlahMatkul == 0)
                                 <div class="tidak-ada-data">
                                     <img src="{{ asset('storage/svg/no-result.svg') }}" class="tanpa-data">
                                 </div>
@@ -270,8 +266,8 @@
                     var modalFooter = myModal._element.querySelector('.modal-footer');
 
                     // Memperbarui href pada tombol hapus di footer modal
-                    var deleteBtn = modalFooter.querySelector('#deleteBtn');
-                    deleteBtn.setAttribute('href', 'kelas/' + deleteId + '/hapus');
+                    var deleteBtn = modalFooter.querySelector('#deleteBtnMatkul');
+                    deleteBtn.setAttribute('href', 'matkul/' + deleteId + '/hapus');
 
                     myModal.show(); // Menampilkan modal
                 });

@@ -6,6 +6,7 @@ use App\Http\Requests\EditMahasiswaRequest;
 use App\Http\Requests\TambahMahasiswaRequest;
 use App\Models\Kelas;
 use App\Models\Mahasiswa;
+use App\Models\Matkul;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -21,13 +22,16 @@ class MahasiswaController extends Controller
 
         $kelasPagi = Kelas::where("waktu_pembelajaran", "=", "P")->get();
         $kelasMalam = Kelas::where("waktu_pembelajaran", "=", "M")->get();
+        $matkul = Matkul::with("mahasiswa")->get();
+        
 
-        return view("mahasiswa.tambah-mahasiswa", ["kelasPagi" => $kelasPagi->sortBy("nama"), "kelasMalam" => $kelasMalam->sortBy("nama")]);
+        return view("mahasiswa.tambah-mahasiswa", ["kelasPagi" => $kelasPagi->sortBy("nama"), "kelasMalam" => $kelasMalam->sortBy("nama"), "matkul" => $matkul]);
     }
 
     public function tambahMahasiswaAction(TambahMahasiswaRequest $request){
 
         $mahasiswa = Mahasiswa::where("nim", "=", $request->input("nim"))->get();
+
 
         if($mahasiswa->count() != 0){
             return redirect()->route("mahasiswa.data.page")->with(["status-gagal" => "Mahasiswa sudah tefdaftar", "idMahasiswaTerdaftar" => $mahasiswa[0]->id]);
@@ -73,6 +77,7 @@ class MahasiswaController extends Controller
             "nama" => $request->input("nama"),
             "jenis_kelamin" => $request->input("jenis_kelamin"),
             "id_kelas" => $request->input("id_kelas"),
+            "id_matkul" => $request->input("id_matkul")
         ]);
 
         return redirect()->route("mahasiswa.data.page")->with(["status" => "Data mahasiswa berhasil diperbarui"]);

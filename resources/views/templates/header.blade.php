@@ -65,6 +65,13 @@
                             Kelas
                         </a>
                     </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link {{ $halaman == 'matkul' ? 'active' : '' }}"
+                            href="{{ route('matkul.data.page') }}">
+                            Mata Kuliah
+                        </a>
+                    </li>
                 </ul>
 
             </div>

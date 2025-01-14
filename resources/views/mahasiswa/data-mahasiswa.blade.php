@@ -200,7 +200,7 @@
                                                     </svg></a>
                                             </td>
                                             <td class="btn-aksi">
-                                                <a href="#" title="hapus data" data-bs-toggle="modal"
+                                                <a href="" title="hapus data" data-bs-toggle="modal"
                                                     data-bs-target="#modal-small" data-id="{{ $dt->id }}"><svg
                                                         xmlns="http://www.w3.org/2000/svg" width="24"
                                                         height="24" viewBox="0 0 24 24" fill="none"

@@ -26,6 +26,7 @@ class TambahMahasiswaRequest extends FormRequest
             "nama" => ["required", "max:50"],
             "jenis_kelamin" => ["required", "max:1"],
             "id_kelas" => ["required"],
+            "id_matkul" => ["required"],
         ];
     }
 }

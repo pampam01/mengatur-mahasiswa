@@ -3,6 +3,7 @@
 use App\Http\Controllers\BerandaController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\MahasiswaController;
+use App\Http\Controllers\MatkulController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -54,6 +55,15 @@ Route::get("/kelas/{idKelas}/mahasiswa/{idMahasiswa}/hapus", [KelasController::c
 })->whereNumber("id");
 
 Route::get("/kelas/mahasiswa/{id}/hapus", [KelasController::class, "hapusAllMahasiswaByKelas"])->name("mahasiswa.kelas.hapus");
+
+Route::get("/matkul", [MatkulController::class, "index"])->name("matkul.data.page");
+Route::get("/matkul/tambah", [MatkulController::class, "tambahMatkulPage"])->name("matkul.tambah.page");
+Route::post("/matkul/tambah", [MatkulController::class, "tambahMatkulAction"])->name("matkul.tambah.action");
+Route::get("/matkul/{id}/edit", [MatkulController::class, "editMatkulPage"])->name("matkul.edit.page")->missing(function(){
+    return response()->view("errors.404");
+})->whereNumber("id");
+Route::post("/matkul/{id}/edit", [MatkulController::class, "editMatkulAction"])->name("matkul.edit.action")->whereNumber("id");
+Route::get("/matkul/{id}/hapus", [MatkulController::class, "hapusMatkul"])->name("matkul.data.hapus")->whereNumber("id");
 
 Route::fallback(function(){
     return view("errors.404");

@@ -18,10 +18,15 @@ class Mahasiswa extends Model
         "nim",
         "nama",
         "jenis_kelamin",
-        "id_kelas"
+        "id_kelas",
+        "id_matkul"
     ];
 
     public function kelas(): BelongsTo{
         return $this->belongsTo(Kelas::class, "id_kelas", "id");
+    }
+
+    public function matkul(): BelongsTo{
+        return $this->belongsTo(Matkul::class, "id_matkul", "id");
     }
 }
